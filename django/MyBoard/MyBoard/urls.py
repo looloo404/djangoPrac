@@ -1,4 +1,4 @@
-"""dbtest URL Configuration
+"""MyBoard URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -16,18 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',views.index,name='index'),
-    path('detail/<int:id>',views.detail),
-    path('update_form/<int:id>',views.update_form, name='updateform'),
-    path('updateres/',views.update_proc, name='updateres'),
-    # 클릭 (id가 없는 이유는 request post(hidden)로 전달
-    path('insert_form/',views.insert_form,name='insertform'),
-    path('insertres/',views.insert_proc, name='insertres'),
-    path('deleteres/<int:id>',views.delete_proc, name='deleteres'),
-
-
-    #http://127.0.0.1:8000
+    path("admin/", admin.site.urls),
+    path("", views.index,name = 'index1'),
+    path('insert_form/',views.insert_form, name = 'forminsert'),
+    path('insertres/',views.insert_proc),
+    path('detail/<int:id>', views.detail,name = 'detail'),
+    path('delete/<int:id>', views.delete_proc, name = 'delete'),
+    path('updateform/<int:id>',views.update_proc, name = 'update'),
+    path('updateres/<int:id>',views.updateRes, name = 'updateRes')
+    
 ]
