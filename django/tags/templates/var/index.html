@@ -17,5 +17,15 @@
     <br>
     <a href = 'if02/'> if2 </a>
     <br>
+    <a href="req/?q=python">GET</a>
+    <br>
+    <form action= "req/" method='GET'>
+        {% csrf_token %}
+        <input type = 'text' name = 'q'>
+        <input type = 'submit' value = 'POST NOT GET'>
+    </form>
+    <br>
+    <a href = 'static/'>static</a>
+
 </body>
 </html>

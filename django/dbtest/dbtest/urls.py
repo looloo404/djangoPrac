@@ -1,4 +1,4 @@
-"""tags URL Configuration
+"""dbtest URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,19 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from . import views
 
-app_name = 'var'
 urlpatterns = [
-    path('',views.index),
-    path('var01/',views.variable01),
-    path('var02/',views.variable02),
-    path('for/',views.testfor),
-    #http:localhost/var/for
-    path('if01/',views.iftest),
-    path('if02/',views.iftest2),
-    path('req/',views.get_post),
-    path('static/',views.staticTest)
+    path('admin/', admin.site.urls),
+    path('',views.index,name='index'),
+    path('detail/<int:id>',views.detail),
+    path('update_form/<int:id>',views.update_form, name='updateform'),
+    path('updateres/',views.update_proc, name='updateres'),
+    # 클릭 (id가 없는 이유는 request post(hidden)로 전달
+    path('insert_form/',views.insert_form,name='insertform'),
+    path('insertres/',views.insert_proc, name='insertres'),
+    path('deleteres/<int:id>',views.delete_proc, name='deleteres'),
 
+
+    #http://127.0.0.1:8000
 ]

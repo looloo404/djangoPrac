@@ -23,3 +23,15 @@ def iftest(request):
 def iftest2(request):
     member = {'id':'multi','class':'ai', 'role':'manager'}
     return render(request,'var/if02.html',{'user':member})
+
+
+def get_post(request):
+    if request.method == 'GET':
+        q=request.GET['q']
+        return render(request,'var/get.html',{'q':q})
+    elif request.method == 'POST':
+        id = request.POST['id']
+        return render(request,'var/post.html',{'id':id})
+    
+def staticTest(request):
+    return render(request , 'var/staticTest.html')

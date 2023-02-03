@@ -120,6 +120,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+#css, js 문서를 저장하는 곳
+STATICFILES_DIRS = [BASE_DIR/'static'] #BASE_DIR(projectname)/static
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
