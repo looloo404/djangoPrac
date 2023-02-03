@@ -15,7 +15,15 @@
     </script>
 </head>
 <body>
-    <h1>Hello, Django</h1>
+    <h1>Hello, Django, {{request.session.myname}}님 반갑습니다. </h1>
+    <h3><a href = {% url "register" %}>회원가입</a></h3>
+
+    {% if request.session.myname %}
+        <h3><a href={% url "logout" %}>logout</a></h3>
+    {% else %}
+        <h3><a href={% url "login" %}>login</a></h3>
+    {% endif %}
+   
 
     <table border="1">
         <col width="50">

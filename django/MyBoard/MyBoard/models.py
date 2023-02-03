@@ -10,3 +10,10 @@ class MyBoard(models.Model) :
         return self.mytitle
     
     
+class MyMember(models.Model):
+    myname = models.CharField( max_length=100)
+    mypassword = models.CharField(max_length=100)
+    myemail = models.CharField(max_length=100)
+    
+    def __str__(self) :
+        return str({'myname':self.mynamem, 'myemail':self.myemail})

@@ -1,11 +1,15 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import MyBoard
+from .models import MyMember
 from django.utils import timezone
 from django.core.paginator import Paginator
 
 
 def index(request) :
+    
+    
+    
     myBoard_all = MyBoard.objects.all().order_by('-id')
     #select * from MyBoard_MyBoard
     
@@ -111,10 +115,48 @@ def updateRes(request,id):
     
     if result1+result2+result3 ==3  :
         return redirect('detail',id=id)
-        
     
 
+def register(request):
+    if request.method == 'GET':
+        return render(request,'register.html')
+    elif request.method == 'POST':
+        name = request.POST['myname']
+        password = request.POST['mypassword'] 
+        email = request.POST['myemail'] 
+        
+        result = MyMember.objects.create(myname = name, 
+                                         mypassword=password,myemail= email )
+        
+        return redirect('index1')
+        
     
+    
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    elif request.method == 'POST':
+        myname = request.POST['myname']
+        mypassword = request.POST['mypassword']
+        
+        mymember = MyMember.objects.get(myname = myname)
+        
+        if mypassword == mymember.mypassword :
+            #본래는 암호화해서 넣는다.
+            #서버에서는 암호화 해제해서 약속된 값이 있을 경우 통신연결한다.
+            #성공했으니 로그인이 된 페이지
+            #모든 페이지들이 세션을 통해서 로그인이 됐는지 확인한다.
+            #세션은 일정시간이 되면 기록이사라진다 단 이건 개발자단에서 해결하는 것이 아니다.
+            request.session['myname'] = mymember.myname
+            return redirect('index1')
+        else :
+            #다시 로그인 페이지
+            return redirect('login') 
+        
+
+def logout(request):
+    del request.session['myname']
+    return redirect('index1')
     
 
     
