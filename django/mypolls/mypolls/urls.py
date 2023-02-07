@@ -1,4 +1,4 @@
-"""updown URL Configuration
+"""mypolls URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -14,13 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from . import views
+from django.urls import path, include
+
 urlpatterns = [
-    path("admin/", admin.site.urls), 
-    path('',views.index,name = 'index'), #파일선택
-    path('upload',views.upload_proc,name = 'upload'),#파일 업로드 완료후 -> download.html
-    #download.html 다운로드 클릭하면 -> 다운로드 실행
-    path('download/<str:filename>',views.download_proc,name = 'download')
-    
+    path("admin/", admin.site.urls),
+    path('',include('polls.urls')),
 ]
