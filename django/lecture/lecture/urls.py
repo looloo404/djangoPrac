@@ -14,8 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic.base import TemplateView
+from django.conf.urls.static import static
+from django.conf import settings
+
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-]
+    path('users/',include('users.urls')),
+    path('bbs/',include('bbs.urls')),
+    path('',TemplateView.as_view(template_name = 'index.html'),name = 'home')
+    # 내가 만든 뷰와는 상관없음 그냥 index.html을 리턴해준다.
+
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+#js, css , image 정적 파일 관리(Django가 webserver 역할을 함)
